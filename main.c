@@ -50,16 +50,17 @@ static uint8_t write_buff[AT25DFX_TEST_DATA_SIZE];
 static uint8_t read_buff[AT25DFX_TEST_DATA_SIZE];
 
 void delay_some(void) {
-    for (volatile int i=23000; i>0; i--) { }
+    for (volatile int i = 23000; i > 0; i--) {
+    }
 }
 
 void blink(void) {
-	gpio_set_pin_level(USER_LED, true);
-        delay_some();
-	gpio_set_pin_level(USER_LED, false);
-        delay_some();
-        delay_some();
-        delay_some();
+    gpio_set_pin_level(USER_LED, true);
+    delay_some();
+    gpio_set_pin_level(USER_LED, false);
+    delay_some();
+    delay_some();
+    delay_some();
 }
 
 void blinks(void) {
@@ -72,115 +73,140 @@ void blinks(void) {
     blink();
 }
 
-void error(void)
-{
-        while(1) {
-                blink(); blink();
-
-                delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
-                delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
-                delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
-
-                blink();
-
-                delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
-                delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
-                delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
-        }
-}
-
-void error_special(void)
-{
+void error(void) {
     while (1) {
         blink();
-        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
-        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+        blink();
 
-        blink(); blink();
-        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
-        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
 
-        blink(); blink(); blink();
-        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
-        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+        blink();
 
-        blink(); blink(); blink(); blink();
-        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
-        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
-
-        blink(); blink(); blink(); blink(); blink();
-        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
-        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
-        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
-        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
-        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
-        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
-        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
+        delay_some();
     }
+}
+
+void error_special(void) {
+    while (1) {
+        blink();
+        for (int i = 10; i > 0; i--) {
+            delay_some();
+        } for (int j = 2; j > 0; j--) {
+            blink();
+        } for (int i = 10; i > 0; i--) {
+            delay_some();
+        } for (int j = 3; j > 0; j--) {
+            blink();
+        } for (int i = 10; i > 0; i--) {
+            delay_some();
+        } for (int j = 4; j > 0; j--) {
+            blink();
+        } for (int i = 10; i > 0; i--) {
+            delay_some();
+        } for (int j = 5; j > 0; j--) {
+            blink();
+        } for (int i = 35; i > 0; i--) {
+            delay_some();
+    }}
 }
 
 void nice(void) {
     blinks();
 }
 
-int main(void)
-{
-	uint16_t i;
+int main(void) {
 
-	atmel_start_init();
+    uint16_t i;
 
-	at25dfx_init_interface();
+    atmel_start_init();
 
-	/* Unprotect the chip */
-	if (at25dfx_protect_chip(AT25_TYPE_UNPROTECT) == AT25_SUCCESS) {
-		gpio_set_pin_level(USER_LED, false);
-	} else {
-                error();
-                // error_special();
-	}
+    at25dfx_init_interface();
 
-	/* Check if the SerialFlash is valid */
+    /* Unprotect the chip */
+    if (at25dfx_protect_chip(AT25_TYPE_UNPROTECT) == AT25_SUCCESS) {
+        gpio_set_pin_level(USER_LED, false);
+    }
+    else {
+        error(); // PASSED
+        // error_special();
+    }
 
-	if (at25dfx_mem_check() == AT25_SUCCESS) {
-		gpio_set_pin_level(USER_LED, false);
-	} else {
-                error_special();
-                // error();
-	}
+    /* Check if the SerialFlash is valid */
 
-
-	/* Prepare half of the SerialFlash sector as 0xAA */
-	for (i = 0; i < AT25DFX_TEST_DATA_SIZE / 2; i++) {
-		write_buff[i] = 0xAA;
-		read_buff[i]  = 0;
-	}
-
-	/* And the remaining half as 0x55 */
-	for (; i < AT25DFX_TEST_DATA_SIZE; i++) {
-		write_buff[i] = 0x55;
-		read_buff[i]  = 0;
-	}
-
-	/* Erase the block before write */
-	at25dfx_erase_block(AT25DFX_TEST_BLOCK_ADDR);
-
-	/* Write the data to the SerialFlash */
-	at25dfx_write(write_buff, AT25DFX_TEST_DATA_SIZE, AT25DFX_TEST_BLOCK_ADDR);
-
-	/* Read back this sector and compare them with the expected values */
-	at25dfx_read(read_buff, AT25DFX_TEST_DATA_SIZE, AT25DFX_TEST_BLOCK_ADDR);
-
-	for (i = 0; i < AT25DFX_TEST_DATA_SIZE / 2; i++) {
-		if (read_buff[i] != 0xAA) {
-                        error_special();
-		}
-	}
-	for (; i < AT25DFX_TEST_DATA_SIZE; i++) {
-		if (read_buff[i] != 0x55) {
-                        error_special();
-		}
-	}
+/* dont care - adafruit doesn't care about this
+    if (at25dfx_mem_check() == AT25_SUCCESS) {
+        gpio_set_pin_level(USER_LED, false);
+    }
+    else {
         error_special();
-	while (1) {
-	}
+        // error();
+    }
+*/
+
+    /* Prepare half of the SerialFlash sector as 0xAA */
+    for (i = 0; i < AT25DFX_TEST_DATA_SIZE / 2; i++) {
+        write_buff[i] = 0xAA;
+        read_buff[i] = 0;
+    }
+
+    /* And the remaining half as 0x55 */
+    for (; i < AT25DFX_TEST_DATA_SIZE; i++) {
+        write_buff[i] = 0x55;
+        read_buff[i] = 0;
+    }
+
+    /* Erase the block before write */
+    at25dfx_erase_block(AT25DFX_TEST_BLOCK_ADDR);
+
+    /* Write the data to the SerialFlash */
+    at25dfx_write(write_buff, AT25DFX_TEST_DATA_SIZE,
+                  AT25DFX_TEST_BLOCK_ADDR);
+
+    /* Read back this sector and compare them with the expected values */
+    at25dfx_read(read_buff, AT25DFX_TEST_DATA_SIZE, AT25DFX_TEST_BLOCK_ADDR);
+
+    for (i = 0; i < AT25DFX_TEST_DATA_SIZE / 2; i++) {
+        if (read_buff[i] != 0xAA) {
+            // error_special();
+            error(); // PASSED
+        }
+    }
+    for (; i < AT25DFX_TEST_DATA_SIZE; i++) {
+        if (read_buff[i] != 0x55) {
+            // error_special();
+            error(); // PASSED
+        }
+    }
+    error_special();
+    // error();
+    while (1) {
+    }
 }
