@@ -48,12 +48,6 @@ static uint8_t write_buff[AT25DFX_TEST_DATA_SIZE];
 
 /* Buffer used to read in this example */
 static uint8_t read_buff[AT25DFX_TEST_DATA_SIZE];
-/*
-void error(void)
-{
-	gpio_set_pin_level(USER_LED, true);
-}
-*/
 
 void delay_some(void) {
     for (volatile int i=23000; i>0; i--) { }
@@ -80,22 +74,49 @@ void blinks(void) {
 
 void error(void)
 {
-	// gpio_set_pin_level(USER_LED, true);
-        // blinks();
         while(1) {
                 blink(); blink();
+
                 delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
                 delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
                 delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+
                 blink();
+
+                delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+                delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+                delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
         }
 }
 
 void error_special(void)
 {
-                blink(); blink(); delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
-                blink(); blink(); delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
-                blink(); blink(); delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+    while (1) {
+        blink();
+        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+
+        blink(); blink();
+        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+
+        blink(); blink(); blink();
+        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+
+        blink(); blink(); blink(); blink();
+        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+
+        blink(); blink(); blink(); blink(); blink();
+        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+        delay_some(); delay_some(); delay_some(); delay_some(); delay_some();
+    }
 }
 
 void nice(void) {
@@ -107,9 +128,6 @@ int main(void)
 	uint16_t i;
 
 	atmel_start_init();
-        // nice();
-
-        // while(1) { }
 
 	at25dfx_init_interface();
 
@@ -117,7 +135,8 @@ int main(void)
 	if (at25dfx_protect_chip(AT25_TYPE_UNPROTECT) == AT25_SUCCESS) {
 		gpio_set_pin_level(USER_LED, false);
 	} else {
-		error();
+                error();
+                // error_special();
 	}
 
 	/* Check if the SerialFlash is valid */
@@ -125,7 +144,8 @@ int main(void)
 	if (at25dfx_mem_check() == AT25_SUCCESS) {
 		gpio_set_pin_level(USER_LED, false);
 	} else {
-		error();
+                error_special();
+                // error();
 	}
 
 
@@ -152,15 +172,12 @@ int main(void)
 
 	for (i = 0; i < AT25DFX_TEST_DATA_SIZE / 2; i++) {
 		if (read_buff[i] != 0xAA) {
-			error();
-                        // error_special();
+                        error_special();
 		}
 	}
-        // error_special();
 	for (; i < AT25DFX_TEST_DATA_SIZE; i++) {
 		if (read_buff[i] != 0x55) {
-			error();
-                        // error_special();
+                        error_special();
 		}
 	}
         error_special();
