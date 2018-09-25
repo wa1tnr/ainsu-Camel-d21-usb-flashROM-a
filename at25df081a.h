@@ -35,7 +35,9 @@
 #define AT25DF08A1_H_
 
 /** AT25 device ID */
-#define AT25DFX_DEV_ID 0x0001451F
+// feather m0 express:
+#define AT25DFX_DEV_ID 0x01401501
+// #define AT25DFX_DEV_ID 0x0001451F
 /** AT25 total size */
 #define AT25DFX_SIZE (1 * 1024 * 1024)
 
