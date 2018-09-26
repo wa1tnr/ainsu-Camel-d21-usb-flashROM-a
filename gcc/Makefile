@@ -23,11 +23,17 @@ else
 	endif
 endif
 
+CFLAGS = -Wall -Werror -fmax-errors=3
+
 # List the subdirectories for creating object files
 SUB_DIRS +=  \
  \
 samd21a/gcc/gcc \
+samd21a/gcc \
+hpl/usb \
 hpl/dmac \
+usb/class/cdc/device \
+usb/device \
 hal/src \
 samd21a/gcc \
 hpl/pm \
@@ -36,14 +42,18 @@ hal/utils/src \
 hpl/sercom \
 examples \
 hpl/gclk \
-hpl/core
+hpl/core \
+usb
+
 
 # List the object files
 OBJS +=  \
 hal/src/hal_io.o \
 at25df081a.o \
 samd21a/gcc/gcc/startup_samd21.o \
+usb/class/cdc/device/cdcdf_acm.o \
 hal/utils/src/utils_syscalls.o \
+hpl/usb/hpl_usb.o \
 hal/src/hal_spi_m_sync.o \
 hal/src/hal_delay.o \
 hpl/pm/hpl_pm.o \
@@ -51,11 +61,13 @@ hpl/core/hpl_init.o \
 hal/utils/src/utils_list.o \
 hpl/core/hpl_core_m0plus_base.o \
 hal/utils/src/utils_assert.o \
+usb_start.o \
 hpl/dmac/hpl_dmac.o \
 hpl/sysctrl/hpl_sysctrl.o \
 hpl/gclk/hpl_gclk.o \
+usb/usb_protocol.o \
 hal/src/hal_init.o \
-main.o \
+hal/src/hal_usb_device.o \
 samd21a/gcc/system_samd21.o \
 examples/driver_examples.o \
 driver_init.o \
@@ -64,7 +76,11 @@ hal/src/hal_gpio.o \
 hal/utils/src/utils_event.o \
 hal/src/hal_sleep.o \
 atmel_start.o \
-hal/src/hal_atomic.o
+usb_cdc_echo_main.o \
+usb/device/usbdc.o \
+hal/src/hal_atomic.o \
+src/cf/atsamdx1/usb_gateway.o \
+main.o
 
 OBJS_AS_ARGS +=  \
 "hal/src/hal_io.o" \
@@ -167,7 +183,7 @@ $(OUTPUT_FILE_PATH): $(OBJS)
 %.o: %.c
 	@echo Building file: $<
 	@echo ARM/GNU C Compiler
-	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -c -std=gnu99 \
+	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 $(CFLAGS)       -c -std=gnu99 \
 -D__SAMD21G18A__ -mcpu=cortex-m0plus  \
 -I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sercom" -I"../hpl/sysctrl" -I"../hri" -I"../" -I"../CMSIS/Include" -I"../samd21a/include"  \
 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
@@ -176,7 +192,7 @@ $(OUTPUT_FILE_PATH): $(OBJS)
 %.o: %.s
 	@echo Building file: $<
 	@echo ARM/GNU Assembler
-	$(QUOTE)arm-none-eabi-as$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -c -std=gnu99 \
+	$(QUOTE)arm-none-eabi-as$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 $(CFLAGS)       -c -std=gnu99 \
 -D__SAMD21G18A__ -mcpu=cortex-m0plus  \
 -I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sercom" -I"../hpl/sysctrl" -I"../hri" -I"../" -I"../CMSIS/Include" -I"../samd21a/include"  \
 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
@@ -185,7 +201,7 @@ $(OUTPUT_FILE_PATH): $(OBJS)
 %.o: %.S
 	@echo Building file: $<
 	@echo ARM/GNU Preprocessing Assembler
-	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 -Wall -c -std=gnu99 \
+	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 $(CFLAGS)       -c -std=gnu99 \
 -D__SAMD21G18A__ -mcpu=cortex-m0plus  \
 -I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sercom" -I"../hpl/sysctrl" -I"../hri" -I"../" -I"../CMSIS/Include" -I"../samd21a/include"  \
 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
