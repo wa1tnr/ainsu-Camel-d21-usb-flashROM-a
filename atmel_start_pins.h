@@ -27,4 +27,8 @@
 #define PA14 GPIO(GPIO_PORTA, 14)
 #define USER_LED GPIO(GPIO_PORTA, 17)
 
+/* merged two lines, from the USB project code: */
+#define USB_DM GPIO(GPIO_PORTA, 24)
+#define USB_DP GPIO(GPIO_PORTA, 25)
+
 #endif // ATMEL_START_PINS_H_INCLUDED
