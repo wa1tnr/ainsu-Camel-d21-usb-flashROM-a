@@ -39,7 +39,7 @@
 
 extern void main_cf(void);
 
-int main(void) {
+void main_cdcd(void) {
         atmel_start_init();
         cdcd_acm_example();
 //      main_cf();
