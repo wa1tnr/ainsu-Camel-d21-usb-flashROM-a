@@ -40,6 +40,9 @@ hal/utils/src \
 hpl/sercom \
 examples \
 hpl/gclk \
+src \
+src/cf \
+src/cf/atsamdx1 \
 hpl/core \
 usb
 
