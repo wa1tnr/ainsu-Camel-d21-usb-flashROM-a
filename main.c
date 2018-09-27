@@ -55,6 +55,12 @@ void delay_some(void) {
     }
 }
 
+void debug_gpio_pa17_init(void) {
+    gpio_set_pin_direction(USER_LED, GPIO_DIRECTION_OUT);
+    gpio_set_pin_level(USER_LED, false);
+    gpio_set_pin_function(USER_LED, GPIO_PIN_FUNCTION_OFF);
+}
+
 void blink(void) {
     gpio_set_pin_level(USER_LED, true);
     delay_some();
@@ -149,7 +155,11 @@ int main(void) {
 
     uint16_t i;
 
+    debug_gpio_pa17_init(); // ALSO KLUDGE
+    error(); // TRAP
+    system_init(); // OUT OF TURN - KLUDGE - DEBUG ONLY
     atmel_start_init();
+
 
     at25dfx_init_interface();
 

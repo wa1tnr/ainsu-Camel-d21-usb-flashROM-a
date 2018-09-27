@@ -539,7 +539,7 @@
 // <i> Indicates whether generic clock 7 configuration is enabled or not
 // <id> enable_gclk_gen_7
 #ifndef CONF_GCLK_GENERATOR_7_CONFIG
-#define CONF_GCLK_GENERATOR_7_CONFIG 0
+#define CONF_GCLK_GENERATOR_7_CONFIG 1
 #endif
 
 // <h> Generic Clock Generator Control
@@ -547,7 +547,7 @@
 // <i> Indicates whether Run in Standby is enabled or not
 // <id> gclk_arch_gen_7_RUNSTDBY
 #ifndef CONF_GCLK_GEN_7_RUNSTDBY
-#define CONF_GCLK_GEN_7_RUNSTDBY 0
+#define CONF_GCLK_GEN_7_RUNSTDBY 1
 #endif
 
 // <q> Divide Selection
@@ -582,7 +582,7 @@
 // <i> Indicates whether Generic Clock Generator Enable is enabled or not
 // <id> gclk_arch_gen_7_enable
 #ifndef CONF_GCLK_GEN_7_GENEN
-#define CONF_GCLK_GEN_7_GENEN 0
+#define CONF_GCLK_GEN_7_GENEN 1
 #endif
 
 // <y> Generic clock generator 7 source
@@ -598,7 +598,7 @@
 // <i> This defines the clock source for generic clock generator 7
 // <id> gclk_gen_7_oscillator
 #ifndef CONF_GCLK_GEN_7_SRC
-#define CONF_GCLK_GEN_7_SRC GCLK_GENCTRL_SRC_XOSC
+#define CONF_GCLK_GEN_7_SRC GCLK_GENCTRL_SRC_DFLL48M
 #endif
 // </h>
 

@@ -65,7 +65,6 @@ void SPI_0_PORT_init(void)
 
 void TARGET_USB_PORT_init(void)
 {
-
 	gpio_set_pin_direction(USB_DM,
 	                       // <y> Pin direction
 	                       // <id> pad_direction
@@ -226,6 +225,6 @@ void system_init(void)
 
 	gpio_set_pin_function(USER_LED, GPIO_PIN_FUNCTION_OFF);
 
-	SPI_0_init();
 	TARGET_USB_init();
+	// SPI_0_init();
 }
