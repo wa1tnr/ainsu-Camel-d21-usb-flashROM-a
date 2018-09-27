@@ -142,11 +142,18 @@ void nice(void) {
     blinks();
 }
 
+extern void main_cdcd(void);
+
 int main(void) {
 
     uint16_t i;
 
     atmel_start_init();
+    int impossible = -1;
+
+    if (impossible == 0) {
+        main_cdcd();
+    }
 
     at25dfx_init_interface();
 
