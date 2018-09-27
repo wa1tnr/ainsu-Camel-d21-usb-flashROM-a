@@ -118,37 +118,46 @@ OBJS_AS_ARGS +=  \
 "src/cf/atsamdx1/usb_gateway.o" \
 "main.o"
 
-###bookmark
-
 # List the dependency files
 DEPS := $(OBJS:%.o=%.d)
 
+###bookmark
+# 25 original entries in DEPS_AS_ARGS:
+
 DEPS_AS_ARGS +=  \
-"samd21a/gcc/gcc/startup_samd21.d" \
-"hal/src/hal_gpio.d" \
 "hal/src/hal_io.d" \
 "at25df081a.d" \
+"samd21a/gcc/gcc/startup_samd21.d" \
+"usb/class/cdc/device/cdcdf_acm.d" \
 "hal/utils/src/utils_syscalls.d" \
+"hpl/usb/hpl_usb.d" \
 "hal/src/hal_spi_m_sync.d" \
-"hpl/core/hpl_core_m0plus_base.d" \
-"hal/utils/src/utils_list.d" \
-"hpl/dmac/hpl_dmac.d" \
-"hal/utils/src/utils_assert.d" \
 "hal/src/hal_delay.d" \
+"hpl/pm/hpl_pm.d" \
 "hpl/core/hpl_init.d" \
+"hal/utils/src/utils_list.d" \
+"hpl/core/hpl_core_m0plus_base.d" \
+"hal/utils/src/utils_assert.d" \
+"usb_start.d" \
+"hpl/dmac/hpl_dmac.d" \
 "hpl/sysctrl/hpl_sysctrl.d" \
 "hpl/gclk/hpl_gclk.d" \
+"usb/usb_protocol.d" \
 "hal/src/hal_init.d" \
-"driver_init.d" \
+"hal/src/hal_usb_device.d" \
 "samd21a/gcc/system_samd21.d" \
-"main.d" \
 "examples/driver_examples.d" \
-"hal/src/hal_sleep.d" \
+"driver_init.d" \
 "hpl/sercom/hpl_sercom.d" \
+"hal/src/hal_gpio.d" \
 "hal/utils/src/utils_event.d" \
-"hal/src/hal_atomic.d" \
-"hpl/pm/hpl_pm.d" \
-"atmel_start.d"
+"hal/src/hal_sleep.d" \
+"atmel_start.d" \
+"usb_cdc_echo_main.d" \
+"usb/device/usbdc.d" \
+"hal/src/hal_atomic.d"
+"src/cf/atsamdx1/usb_gateway.d" \
+"main.d"
 
 OUTPUT_FILE_NAME :=AtmelStart
 QUOTE := "
