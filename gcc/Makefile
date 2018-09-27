@@ -210,30 +210,7 @@ $(OUTPUT_FILE_PATH): $(OBJS)
 	@echo ARM/GNU Assembler
 	$(QUOTE)arm-none-eabi-as$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 $(CFLAGS)       -c -std=gnu99 \
 -D__SAMD21G18A__ -mcpu=cortex-m0plus  \
--I"../"
--I"../config"
--I"../examples"
--I"../src"
--I"../src/cf"
--I"../src/cf/atsamdx1"
--I"../hal/include"
--I"../hal/utils/include"
--I"../hpl/core"
--I"../hpl/dmac"
--I"../hpl/gclk"
--I"../hpl/pm"
--I"../hpl/port"
--I"../hpl/sercom"
--I"../hpl/sysctrl"
--I"../hpl/usb"
--I"../hri"
--I"../config"
--I"../usb"
--I"../usb/class/cdc"
--I"../usb/class/cdc/device"
--I"../usb/device"
--I"../CMSIS/Include"
--I"../samd21a/include"  \
+-I"../" -I"../config" -I"../examples" -I"../src" -I"../src/cf" -I"../src/cf/atsamdx1" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sercom" -I"../hpl/sysctrl" -I"../hpl/usb" -I"../hri" -I"../config" -I"../usb" -I"../usb/class/cdc" -I"../usb/class/cdc/device" -I"../usb/device" -I"../CMSIS/Include" -I"../samd21a/include"  \
 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
 	@echo Finished building: $<
 
