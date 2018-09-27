@@ -82,9 +82,6 @@ hal/src/hal_atomic.o \
 src/cf/atsamdx1/usb_gateway.o \
 main.o
 
-
-
-
 OBJS_AS_ARGS +=  \
 "hal/src/hal_io.o" \
 "at25df081a.o" \
@@ -96,11 +93,7 @@ OBJS_AS_ARGS +=  \
 "hal/src/hal_spi_m_sync.o" \
 "hal/src/hal_delay.o" \
 "hpl/pm/hpl_pm.o" \
-
-###bookmark
 "hpl/core/hpl_init.o" \
-"hpl/core/hpl_init.o" \
-
 "hal/utils/src/utils_list.o" \
 "hpl/core/hpl_core_m0plus_base.o" \
 "hal/utils/src/utils_assert.o" \
@@ -121,33 +114,11 @@ OBJS_AS_ARGS +=  \
 "atmel_start.o" \
 "usb_cdc_echo_main.o" \
 "usb/device/usbdc.o" \
-"hal/src/hal_atomic.o" \
+"hal/src/hal_atomic.o"
 "src/cf/atsamdx1/usb_gateway.o" \
 "main.o"
 
-
-
-
-
-
-
-"hal/utils/src/utils_list.o" \
-"hpl/core/hpl_core_m0plus_base.o" \
-"hal/utils/src/utils_assert.o" \
-"hpl/dmac/hpl_dmac.o" \
-"hpl/sysctrl/hpl_sysctrl.o" \
-"hpl/gclk/hpl_gclk.o" \
-"hal/src/hal_init.o" \
-"main.o" \
-"samd21a/gcc/system_samd21.o" \
-"examples/driver_examples.o" \
-"driver_init.o" \
-"hpl/sercom/hpl_sercom.o" \
-"hal/src/hal_gpio.o" \
-"hal/utils/src/utils_event.o" \
-"hal/src/hal_sleep.o" \
-"atmel_start.o" \
-"hal/src/hal_atomic.o"
+###bookmark
 
 # List the dependency files
 DEPS := $(OBJS:%.o=%.d)
