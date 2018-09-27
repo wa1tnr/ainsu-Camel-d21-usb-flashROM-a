@@ -82,15 +82,55 @@ hal/src/hal_atomic.o \
 src/cf/atsamdx1/usb_gateway.o \
 main.o
 
+
+
+
 OBJS_AS_ARGS +=  \
 "hal/src/hal_io.o" \
 "at25df081a.o" \
+"at25df081a.o" \
 "samd21a/gcc/gcc/startup_samd21.o" \
+"usb/class/cdc/device/cdcdf_acm.o" \
 "hal/utils/src/utils_syscalls.o" \
+"hpl/usb/hpl_usb.o" \
 "hal/src/hal_spi_m_sync.o" \
 "hal/src/hal_delay.o" \
 "hpl/pm/hpl_pm.o" \
+
+###bookmark
 "hpl/core/hpl_init.o" \
+"hpl/core/hpl_init.o" \
+
+"hal/utils/src/utils_list.o" \
+"hpl/core/hpl_core_m0plus_base.o" \
+"hal/utils/src/utils_assert.o" \
+"usb_start.o" \
+"hpl/dmac/hpl_dmac.o" \
+"hpl/sysctrl/hpl_sysctrl.o" \
+"hpl/gclk/hpl_gclk.o" \
+"usb/usb_protocol.o" \
+"hal/src/hal_init.o" \
+"hal/src/hal_usb_device.o" \
+"samd21a/gcc/system_samd21.o" \
+"examples/driver_examples.o" \
+"driver_init.o" \
+"hpl/sercom/hpl_sercom.o" \
+"hal/src/hal_gpio.o" \
+"hal/utils/src/utils_event.o" \
+"hal/src/hal_sleep.o" \
+"atmel_start.o" \
+"usb_cdc_echo_main.o" \
+"usb/device/usbdc.o" \
+"hal/src/hal_atomic.o" \
+"src/cf/atsamdx1/usb_gateway.o" \
+"main.o"
+
+
+
+
+
+
+
 "hal/utils/src/utils_list.o" \
 "hpl/core/hpl_core_m0plus_base.o" \
 "hal/utils/src/utils_assert.o" \
