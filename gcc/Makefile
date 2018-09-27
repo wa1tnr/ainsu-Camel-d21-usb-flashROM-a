@@ -119,9 +119,6 @@ OBJS_AS_ARGS +=  \
 # List the dependency files
 DEPS := $(OBJS:%.o=%.d)
 
-###bookmark
-# 25 original entries in DEPS_AS_ARGS:
-
 DEPS_AS_ARGS +=  \
 "hal/src/hal_io.d" \
 "at25df081a.d" \
@@ -196,37 +193,14 @@ $(OUTPUT_FILE_PATH): $(OBJS)
 # Compiler targets
 
 
-
+###bookmark 
 
 %.o: %.c
 	@echo Building file: $<
 	@echo ARM/GNU C Compiler
 	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 $(CFLAGS)       -c -std=gnu99 \
 -D__SAMD21G18A__ -mcpu=cortex-m0plus  \
--I"../"
--I"../config"
--I"../examples"
--I"../src"
--I"../src/cf"
--I"../src/cf/atsamdx1"
--I"../hal/include"
--I"../hal/utils/include"
--I"../hpl/core"
--I"../hpl/dmac"
--I"../hpl/gclk"
--I"../hpl/pm"
--I"../hpl/port"
--I"../hpl/sercom"
--I"../hpl/sysctrl"
--I"../hpl/usb"
--I"../hri"
--I"../config"
--I"../usb"
--I"../usb/class/cdc"
--I"../usb/class/cdc/device"
--I"../usb/device"
--I"../CMSIS/Include"
--I"../samd21a/include"  \
+-I"../" -I"../config" -I"../examples" -I"../src" -I"../src/cf" -I"../src/cf/atsamdx1" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sercom" -I"../hpl/sysctrl" -I"../hpl/usb" -I"../hri" -I"../config" -I"../usb" -I"../usb/class/cdc" -I"../usb/class/cdc/device" -I"../usb/device" -I"../CMSIS/Include" -I"../samd21a/include"  \
 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
 	@echo Finished building: $<
 
