@@ -27,7 +27,6 @@ CFLAGS = -Wall -Werror -fmax-errors=3
 
 # List the subdirectories for creating object files
 SUB_DIRS +=  \
- \
 samd21a/gcc/gcc \
 samd21a/gcc \
 hpl/usb \
@@ -35,7 +34,6 @@ hpl/dmac \
 usb/class/cdc/device \
 usb/device \
 hal/src \
-samd21a/gcc \
 hpl/pm \
 hpl/sysctrl \
 hal/utils/src \
@@ -114,7 +112,7 @@ OBJS_AS_ARGS +=  \
 "atmel_start.o" \
 "usb_cdc_echo_main.o" \
 "usb/device/usbdc.o" \
-"hal/src/hal_atomic.o"
+"hal/src/hal_atomic.o" \
 "src/cf/atsamdx1/usb_gateway.o" \
 "main.o"
 
@@ -155,7 +153,7 @@ DEPS_AS_ARGS +=  \
 "atmel_start.d" \
 "usb_cdc_echo_main.d" \
 "usb/device/usbdc.d" \
-"hal/src/hal_atomic.d"
+"hal/src/hal_atomic.d" \
 "src/cf/atsamdx1/usb_gateway.d" \
 "main.d"
 
@@ -205,7 +203,11 @@ $(OUTPUT_FILE_PATH): $(OBJS)
 	@echo ARM/GNU C Compiler
 	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 $(CFLAGS)       -c -std=gnu99 \
 -D__SAMD21G18A__ -mcpu=cortex-m0plus  \
--I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sercom" -I"../hpl/sysctrl" -I"../hri" -I"../" -I"../CMSIS/Include" -I"../samd21a/include"  \
+-I"
+
+# insert here
+
+./samd21a/include"  \
 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
 	@echo Finished building: $<
 
@@ -214,7 +216,12 @@ $(OUTPUT_FILE_PATH): $(OBJS)
 	@echo ARM/GNU Assembler
 	$(QUOTE)arm-none-eabi-as$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 $(CFLAGS)       -c -std=gnu99 \
 -D__SAMD21G18A__ -mcpu=cortex-m0plus  \
--I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sercom" -I"../hpl/sysctrl" -I"../hri" -I"../" -I"../CMSIS/Include" -I"../samd21a/include"  \
+-I"../"
+
+
+# insert here
+
+-I"../samd21a/include"  \
 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
 	@echo Finished building: $<
 
@@ -223,7 +230,11 @@ $(OUTPUT_FILE_PATH): $(OBJS)
 	@echo ARM/GNU Preprocessing Assembler
 	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb -DDEBUG -Os -ffunction-sections -mlong-calls -g3 $(CFLAGS)       -c -std=gnu99 \
 -D__SAMD21G18A__ -mcpu=cortex-m0plus  \
--I"../" -I"../config" -I"../examples" -I"../hal/include" -I"../hal/utils/include" -I"../hpl/core" -I"../hpl/dmac" -I"../hpl/gclk" -I"../hpl/pm" -I"../hpl/port" -I"../hpl/sercom" -I"../hpl/sysctrl" -I"../hri" -I"../" -I"../CMSIS/Include" -I"../samd21a/include"  \
+-I"../"
+
+# insert here
+
+-I"../samd21a/include"  \
 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<"
 	@echo Finished building: $<
 
