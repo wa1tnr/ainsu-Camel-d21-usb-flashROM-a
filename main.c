@@ -35,6 +35,7 @@
  */
 
 #include <atmel_start.h>
+#include <atmel_start_pins.h>
 #include "at25df081a.h"
 
 /* Test size */
@@ -142,18 +143,13 @@ void nice(void) {
     blinks();
 }
 
-extern void main_cdcd(void);
+// extern void main_cdcd(void);
 
 int main(void) {
 
     uint16_t i;
 
     atmel_start_init();
-    int impossible = -1;
-
-    if (impossible == 0) {
-        main_cdcd();
-    }
 
     at25dfx_init_interface();
 
@@ -212,6 +208,9 @@ int main(void) {
             error(); // PASSED
         }
     }
+    // invoke CamelForth right here:
+    cdcd_acm_example();
+
     error_special();
     // error();
     while (1) {
