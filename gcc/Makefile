@@ -81,6 +81,7 @@ usb_cdc_echo_main.o \
 usb/device/usbdc.o \
 hal/src/hal_atomic.o \
 src/cf/atsamdx1/usb_gateway.o \
+src/cf/forth.o \
 main.o
 
 OBJS_AS_ARGS +=  \
@@ -116,6 +117,7 @@ OBJS_AS_ARGS +=  \
 "usb/device/usbdc.o" \
 "hal/src/hal_atomic.o" \
 "src/cf/atsamdx1/usb_gateway.o" \
+"src/cf/forth.o" \
 "main.o"
 
 # List the dependency files
@@ -154,6 +156,7 @@ DEPS_AS_ARGS +=  \
 "usb/device/usbdc.d" \
 "hal/src/hal_atomic.d" \
 "src/cf/atsamdx1/usb_gateway.d" \
+"src/cf/forth.d" \
 "main.d"
 
 OUTPUT_FILE_NAME :=AtmelStart
