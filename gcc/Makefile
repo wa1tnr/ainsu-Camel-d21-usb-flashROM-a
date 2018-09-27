@@ -86,7 +86,6 @@ main.o
 OBJS_AS_ARGS +=  \
 "hal/src/hal_io.o" \
 "at25df081a.o" \
-"at25df081a.o" \
 "samd21a/gcc/gcc/startup_samd21.o" \
 "usb/class/cdc/device/cdcdf_acm.o" \
 "hal/utils/src/utils_syscalls.o" \
