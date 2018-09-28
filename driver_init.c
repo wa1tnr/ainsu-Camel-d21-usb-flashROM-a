@@ -227,4 +227,5 @@ void system_init(void)
 
 	SPI_0_init();
 	// TODO // why // 28 SEP // TARGET_USB_init(); // enabling this kills the program
+	TARGET_USB_init();
 }
