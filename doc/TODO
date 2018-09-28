@@ -1,0 +1,6 @@
+Fri Sep 28 19:11:26 UTC 2018
+
+Simple verification that SPI flashROM is truly
+being written to (or at least, read from) is
+now high on the list of things TODO.
+
