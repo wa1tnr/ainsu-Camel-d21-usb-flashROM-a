@@ -225,6 +225,6 @@ void system_init(void)
 
 	gpio_set_pin_function(USER_LED, GPIO_PIN_FUNCTION_OFF);
 
-	TARGET_USB_init();
-	// SPI_0_init();
+	SPI_0_init();
+	// TODO // why // 28 SEP // TARGET_USB_init(); // enabling this kills the program
 }
