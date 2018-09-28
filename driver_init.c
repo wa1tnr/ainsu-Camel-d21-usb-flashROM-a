@@ -227,5 +227,6 @@ void system_init(void)
 
 	SPI_0_init();
 	// TODO // why // 28 SEP // TARGET_USB_init(); // enabling this kills the program
+        // answer: the ./config directory wasn't fully ported over, yet.
 	TARGET_USB_init();
 }
