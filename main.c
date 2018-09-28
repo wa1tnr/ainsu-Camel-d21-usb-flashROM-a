@@ -162,16 +162,17 @@ int main(void) {
 
     at25dfx_init_interface();
 
-    error(); // TRAP
 
     /* Unprotect the chip */
     if (at25dfx_protect_chip(AT25_TYPE_UNPROTECT) == AT25_SUCCESS) {
         gpio_set_pin_level(USER_LED, false);
     }
     else {
-        error(); // PASSED
-        // error_special();
+        // error(); // PASSED_not_known_NOW
+        error_special();
     }
+
+    error(); // TRAP
 
     /* Check if the SerialFlash is valid */
 
