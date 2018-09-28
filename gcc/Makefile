@@ -248,7 +248,6 @@ install:
 	@echo "[0;1;32;40m./scripts/_bossac_local.sh [0;1;36;40m./AtmelStart.bin[0m"
 	@sleep 1
 	@./scripts/_bossac_local.sh ./AtmelStart.bin
-	# use 'make checkout' to tell git no changes to AtmelStart.*
 
 clean:
 	rm -f $(OBJS_AS_ARGS)
