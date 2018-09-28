@@ -51,7 +51,7 @@ static uint8_t write_buff[AT25DFX_TEST_DATA_SIZE];
 static uint8_t read_buff[AT25DFX_TEST_DATA_SIZE];
 
 void delay_some(void) {
-    for (volatile int i = 23000; i > 0; i--) {
+    for (volatile int i = (23000 * 3); i > 0; i--) {
     }
 }
 
