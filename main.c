@@ -168,11 +168,9 @@ int main(void) {
         gpio_set_pin_level(USER_LED, false);
     }
     else {
-        // error(); // PASSED_not_known_NOW
+        error(); // PASSED?
         error_special();
     }
-
-    error(); // TRAP
 
     /* Check if the SerialFlash is valid */
 
@@ -207,6 +205,8 @@ int main(void) {
 
     /* Read back this sector and compare them with the expected values */
     at25dfx_read(read_buff, AT25DFX_TEST_DATA_SIZE, AT25DFX_TEST_BLOCK_ADDR);
+
+    error(); // TRAP
 
     for (i = 0; i < AT25DFX_TEST_DATA_SIZE / 2; i++) {
         if (read_buff[i] != 0xAA) {
