@@ -1,0 +1,2 @@
+291da92a67101fc6e78e44ae286bc4ee  SerialFlashD21_24_SEP_AA.atzip
+2aad256da14d5098414c0c51ecb5fa78  USB CDC Echo.atzip  older source .atzip for USB CDC only
