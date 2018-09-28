@@ -157,8 +157,8 @@ int main(void) {
 
     debug_gpio_pa17_init(); // ALSO KLUDGE
     system_init(); // OUT OF TURN - KLUDGE - DEBUG ONLY
-    error(); // TRAP
     atmel_start_init();
+    error(); // TRAP
 
 
     at25dfx_init_interface();
