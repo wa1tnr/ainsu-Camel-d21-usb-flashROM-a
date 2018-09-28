@@ -168,8 +168,8 @@ int main(void) {
         gpio_set_pin_level(USER_LED, false);
     }
     else {
-        error(); // PASSED?
-        error_special();
+        error(); // PASSED
+        // error_special();
     }
 
     /* Check if the SerialFlash is valid */
@@ -206,8 +206,6 @@ int main(void) {
     /* Read back this sector and compare them with the expected values */
     at25dfx_read(read_buff, AT25DFX_TEST_DATA_SIZE, AT25DFX_TEST_BLOCK_ADDR);
 
-    error(); // TRAP
-
     for (i = 0; i < AT25DFX_TEST_DATA_SIZE / 2; i++) {
         if (read_buff[i] != 0xAA) {
             // error_special();
@@ -221,10 +219,11 @@ int main(void) {
         }
     }
     // invoke CamelForth right here:
+
     cdcd_acm_example();
 
-    error_special();
-    // error();
+    // error_special();
+    error();
     while (1) {
     }
 }
