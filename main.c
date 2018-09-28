@@ -156,8 +156,8 @@ int main(void) {
     uint16_t i;
 
     debug_gpio_pa17_init(); // ALSO KLUDGE
-    error(); // TRAP
     system_init(); // OUT OF TURN - KLUDGE - DEBUG ONLY
+    error(); // TRAP
     atmel_start_init();
 
 
