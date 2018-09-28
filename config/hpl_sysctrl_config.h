@@ -84,7 +84,7 @@
 // <i> Default: No Prescaling
 // <id> osc8m_presc
 #ifndef CONF_OSC8M_PRESC
-#define CONF_OSC8M_PRESC SYSCTRL_OSC8M_PRESC_3_Val
+#define CONF_OSC8M_PRESC SYSCTRL_OSC8M_PRESC_0_Val
 #endif
 
 // <q> Overwrite Default Osc Calibration
@@ -410,7 +410,7 @@
 // <i> Indicates whether configuration for DFLL is enabled or not
 // <id> enable_dfll48m
 #ifndef CONF_DFLL_CONFIG
-#define CONF_DFLL_CONFIG 0
+#define CONF_DFLL_CONFIG 1
 #endif
 
 // <y> Reference Clock Source
@@ -433,7 +433,7 @@
 // <i> Indicates whether DFLL is enabled or not
 // <id> dfll48m_arch_enable
 #ifndef CONF_DFLL_ENABLE
-#define CONF_DFLL_ENABLE 0
+#define CONF_DFLL_ENABLE 1
 #endif
 
 // <q> Wait Lock
@@ -461,7 +461,7 @@
 // <i> Chill Cycle Disable
 // <id> dfll48m_arch_ccdis
 #ifndef CONF_DFLL_CCDIS
-#define CONF_DFLL_CCDIS 0
+#define CONF_DFLL_CCDIS 1
 #endif
 
 // <q> On Demand
@@ -486,7 +486,7 @@
 // <i> USB Clock Recovery Mode
 // <id> dfll48m_arch_usbcrm
 #ifndef CONF_DFLL_USBCRM
-#define CONF_DFLL_USBCRM 0
+#define CONF_DFLL_USBCRM 1
 #endif
 
 #if CONF_DFLL_USBCRM == 1
@@ -520,7 +520,7 @@
 // <i> Mode
 // <id> dfll48m_mode
 #ifndef CONF_DFLL_MODE
-#define CONF_DFLL_MODE CONF_DFLL_OPEN_LOOP_MODE
+#define CONF_DFLL_MODE CONF_DFLL_CLOSED_LOOP_MODE
 #endif
 
 // <o> Coarse Maximum Step <0x0-0x1F>
@@ -540,7 +540,7 @@
 //  <i> Default: 0
 //  <id> dfll48m_mul
 #ifndef CONF_DFLL_MUL
-#define CONF_DFLL_MUL 0
+#define CONF_DFLL_MUL 48000
 #endif
 
 // <e> DFLL Calibration Overwrite
