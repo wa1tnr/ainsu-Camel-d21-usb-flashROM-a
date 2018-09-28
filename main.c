@@ -158,10 +158,11 @@ int main(void) {
     debug_gpio_pa17_init(); // ALSO KLUDGE
     system_init(); // OUT OF TURN - KLUDGE - DEBUG ONLY
     atmel_start_init();
-    error(); // TRAP
 
 
     at25dfx_init_interface();
+
+    error(); // TRAP
 
     /* Unprotect the chip */
     if (at25dfx_protect_chip(AT25_TYPE_UNPROTECT) == AT25_SUCCESS) {
