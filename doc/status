@@ -1,3 +1,34 @@
+Sat Sep 29 22:58:13 UTC 2018
+
+  ainsu-Camel-d21-usb-flashROM-a
+
+  On branch lark-af-cont-
+
+Definitely now dumping SPI flashROM to the terminal
+(forth never gets to run, in this version; it's all
+preamble, before forth itself is called to begin).
+
+
+Just populate the flashROM using the usual methods
+(I use CircuitPython .UF2 to get going, then copy a
+file onto the SPI flashROM, which presents to the
+host PC as a mounted disk volume, as usual).
+
+Test file was 500 kb of text:
+
+     $ cat -n ./LICENSE >> catchfile.txt
+
+..iterated many times.
+
+
+Can be anything.
+
+
+The program has an offset value to skip over the file
+allocation table (very sloppy estimate; the program
+jumps well into the first textfile when it begins).
+
+
 Sat Sep 29 01:11:22 UTC 2018
 
   ainsu-Camel-d21-usb-flashROM-a
