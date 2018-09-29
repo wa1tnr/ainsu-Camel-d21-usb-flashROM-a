@@ -53,7 +53,7 @@
 #include "cut.inc"              // string cutter utility, for long USB printf's
 
 #include "at25df081a.h"
-static uint8_t read_buff_b[64];
+static uint8_t read_buff_b[4];
 
 // char readstring[64];
 
@@ -171,14 +171,15 @@ void camelforth(void) {
     strcpy(print_string, "\n\ntest buffer:\n\n");
     chopped_acm_write(print_string);
 
-    /* populate the read buffer from SPI flashROM */
-    for (int k = 3; k < 32768; (k = k + 64)) {
+    int offset = ((32768 * 8) -31);
+    int bignumber = 1234123123;
+    for (int k = offset; k < bignumber; (k = k + 8)) {
         // at25dfx_read(read_buff_b, 64, TEST_BLOCK_ADDR_B);
-        at25dfx_read(read_buff_b, 64, k);
+        at25dfx_read(read_buff_b, 8, k);
         strcpy(print_string, (char *) read_buff_b);
-        print_string[63] = '\0';
+        print_string[8] = '\0';
         chopped_acm_write(print_string);
-        for (volatile int i = 4800; i>0; i--) { }
+        for (volatile int i =  9600; i>0; i--) { }
     }
 
     strcpy(print_string, "\n\nalamaraine\n\n");
