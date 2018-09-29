@@ -140,8 +140,11 @@ void camelforth(void) {
     pad_one_space();
 
 /*
-    strcpy(print_string, "On branch master");
-    strcpy(print_string, "On branch ainsu-CamelForth-d51-usb");
+    strcpy(print_string, "On branch lark-ad-cont-");
+
+    repository:
+    ainsu-Camel-d21-usb-flashROM-a
+
 */
     strcpy(print_string, "On branch master");
     chopped_acm_write(print_string);
