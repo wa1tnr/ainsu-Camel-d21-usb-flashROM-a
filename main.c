@@ -39,7 +39,8 @@
 #include "at25df081a.h"
 
 /* Test size */
-#define AT25DFX_TEST_DATA_SIZE (1024)
+// #define AT25DFX_TEST_DATA_SIZE (1024)
+#define AT25DFX_TEST_DATA_SIZE (64)
 
 /* Test block start address */
 #define AT25DFX_TEST_BLOCK_ADDR (0)
@@ -197,14 +198,30 @@ int main(void) {
     }
 
     /* Erase the block before write */
+/*
     at25dfx_erase_block(AT25DFX_TEST_BLOCK_ADDR);
+*/
 
     /* Write the data to the SerialFlash */
+
+/*
+
+DONT WANT WRITES at this time. ;)
+
     at25dfx_write(write_buff, AT25DFX_TEST_DATA_SIZE,
                   AT25DFX_TEST_BLOCK_ADDR);
+*/
 
     /* Read back this sector and compare them with the expected values */
     at25dfx_read(read_buff, AT25DFX_TEST_DATA_SIZE, AT25DFX_TEST_BLOCK_ADDR);
+
+    // strcpy(print_string, read_buff);
+    // print_string[1] = '\0';
+    // print_string[63] = '\0';
+    // chopped_acm_write(print_string);
+
+
+/*
 
     for (i = 0; i < AT25DFX_TEST_DATA_SIZE / 2; i++) {
         if (read_buff[i] != 0xAA) {
@@ -218,6 +235,10 @@ int main(void) {
             error(); // PASSED
         }
     }
+
+*/
+
+
     // invoke CamelForth right here:
 
     cdcd_acm_example();
