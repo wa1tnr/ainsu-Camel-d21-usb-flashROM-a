@@ -29,7 +29,8 @@ int str_cut(char *str, int begin, int len) {
 }
 
 void slower(void) {
-    for (volatile int i = 1295; i > 0; i--) {
+    for (volatile int i = (1295 * 3); i > 0; i--) { // maybe needs to be slower on SAMD21
+    // was 1295 * 3 overkill? TODO
     }
 }
 

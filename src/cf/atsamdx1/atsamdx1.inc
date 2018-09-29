@@ -127,7 +127,8 @@ void pad_one_space(void) {
 void interpreter(void);         /* forward reference */
 
 void camelforth(void) {
-    for (volatile int i = 7080706; i > 0; i--) {
+    // for (volatile int i = 7080706; i > 0; i--) {
+    for (volatile int i = 1080706; i > 0; i--) {
     }
 
     strcpy(print_string, "\n\n");
@@ -149,7 +150,7 @@ void camelforth(void) {
 
     color_reset();
 
-    strcpy(print_string, "\n\nSun Sep 23 00:06:51 UTC 2018");
+    strcpy(print_string, "\n\nSat Sep 29 19:55:01 UTC 2018");
     chopped_acm_write(print_string);
 
     strcpy(print_string, "\n\ncamelforth()\n\n");
