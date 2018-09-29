@@ -1,3 +1,15 @@
+Sat Sep 29 04:44:54 UTC 2018
+
+  ainsu-Camel-d21-usb-flashROM-a
+
+  On branch lark-ad-cont-
+
+Should be possible to graft in the better versions
+of usb_start.c and such.  All that cruft was carefully
+removed, some time ago, in a series of edits meant
+to clean up the code base.
+
+
 Fri Sep 28 19:11:26 UTC 2018
 
 Simple verification that SPI flashROM is truly

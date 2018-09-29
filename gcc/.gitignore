@@ -22,3 +22,5 @@ usb_cdc_echo_main.d
 usb_cdc_echo_main.o
 usb_start.d
 usb_start.o
+usb_support.d
+usb_support.o
