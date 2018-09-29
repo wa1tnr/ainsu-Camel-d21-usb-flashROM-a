@@ -1,16 +1,13 @@
 #include <stdio.h>
 #include <string.h>
 
-# define BUFFLEN 128
+#define BUFFLEN 128
+#define CHOP_LN 5
 
-char delimiter[0];
 char instring[BUFFLEN];
 char tempstring[BUFFLEN];
-// char xtempstr[BUFFLEN];
 
-// void init_the_program(void) {
 void init_cutter(void) {
-    // strcpy(instring, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRS123456789abc");
     strcpy(instring, print_string);
 }
 
@@ -19,70 +16,61 @@ void init_cutter(void) {
  *      everything up to the end.
  */
 
-int str_cut(char *str, int begin, int len)
-{
+int str_cut(char *str, int begin, int len) {
     int l = strlen(str);
 
-    if (len < 0) len = l - begin;
-    if (begin + len > l) len = l - begin;
+    if (len < 0)
+        len = l - begin;
+    if (begin + len > l)
+        len = l - begin;
     memmove(str + begin, str + begin + len, l - len + 1);
 
     return len;
 }
 
-
 void slower(void) {
-    for (volatile int i= 95; i>0; i--) { }
+    for (volatile int i = 1295; i > 0; i--) {
+    }
 }
 
 void printf_cutter(void) {
-    // printf(tempstring, strlen(tempstring));
-    cdcdf_acm_write((uint8_t *)tempstring, strlen(tempstring));
-    slower(); // give a write a chance to complete
-
-#ifdef DEBUG_AINSU_PRINTF
-    tempstring[0] = '\0';
-    strcpy(tempstring, " ^boss hogg$ ");
-    cdcdf_acm_write((uint8_t *)tempstring, strlen(tempstring));
-    slower();
-#endif // #ifdef DEBUG_AINSU_PRINTF
+    cdcdf_acm_write((uint8_t *) tempstring, strlen(tempstring));
+    slower();                   // no ringbuffer - kludge
 }
-
 
 void do_output(void) {
     printf_cutter();
 }
-
-#define CHOP_LN 5
 
 void slicer(char *instring) {
     tempstring[0] = '\0';
     tempstring[1] = '\0';
 
     int origin = 0;
-    int chopln = CHOP_LN; // chop length
+    int chopln = CHOP_LN;       // chop length
     int to_end = -1;
 
     int l = (strlen(instring) / chopln);
 
-    for (int index = 1; index < (l+1); index ++) {
-        int j = chopln * index; //  5 initially
-        int k = j - chopln; // window is chopln wide
+    for (int index = 1; index < (l + 1); index++) {
+        int j = chopln * index;
+        int k = j - chopln;
         strcpy(tempstring, instring);
-        str_cut(tempstring, j,   to_end);   // j = 5 (initial)
-        if (index > 1) { // but it isn't
-            str_cut(tempstring, origin,   k);  // k = 5 here
-        } do_output();
+        str_cut(tempstring, j, to_end);
+        if (index > 1) {
+            str_cut(tempstring, origin, k);
+        }
+        do_output();
     }
 
-    if ((strlen(instring)) >   ( (strlen(instring) / chopln) * chopln    )   ) {
-        strcpy(tempstring, instring); // full string
+    if ((strlen(instring)) > ((strlen(instring) / chopln) * chopln)) {
+        strcpy(tempstring, instring);
         int c = l * chopln;
         str_cut(tempstring, 0, c);
         do_output();
     }
 
-} // end
+}
 
 void cut_main(void) {
     init_cutter();
@@ -93,15 +81,12 @@ void cut_main(void) {
 
 void chopped_acm_write(char *str) {
     cut_main();
-    // cdcdf_acm_write((uint8_t *)print_string, strlen(print_string));
-    // print_string
 }
 
 #ifdef NEVER_DEFINED_EVER
 /*
 
 Stack Overflow
-
 
 permalink:
 
@@ -122,12 +107,13 @@ index to the end of the string.
  *      remove everything up to the end.
  */
 
-int str_cut(char *str, int begin, int len)
-{
+int str_cut(char *str, int begin, int len) {
     int l = strlen(str);
 
-    if (len < 0) len = l - begin;
-    if (begin + len > l) len = l - begin;
+    if (len < 0)
+        len = l - begin;
+    if (begin + len > l)
+        len = l - begin;
     memmove(str + begin, str + begin + len, l - len + 1);
 
     return len;
@@ -146,7 +132,6 @@ in read-only memory.
 
 answered Dec 3 '13 at 8:33
 M Oehm
-
 
 site design / logo © 2018 Stack Exchange Inc;
 user contributions
