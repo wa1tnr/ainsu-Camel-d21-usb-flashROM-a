@@ -1,0 +1,13 @@
+Sat Sep 29 01:11:22 UTC 2018
+
+  ainsu-Camel-d21-usb-flashROM-a
+
+  On branch lark-ad-cont-
+
+Program presently gives a best effort at a (slightly)
+modified CamelForth, with the latest developments, for
+the SAMD21 (ATSAMD21G18A, Adafruit Feather M0 Express)
+with limited SPI flashROM support (entirely untested
+in a meaningful way - seems good according to what
+Atmel Start generated for flashROM support, though).
+
