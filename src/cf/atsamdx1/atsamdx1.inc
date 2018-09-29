@@ -21,7 +21,7 @@
  *
  * AUTHORS
  *  Brad Rodriguez
- *  wa1tnr
+ *  wa1tnr September, 2018
  ******
  * LICENSE TERMS
  *  CamelForth in C
@@ -46,15 +46,11 @@
  */
 
 #include <atmel_start.h>
-#include <stdio.h>
 #include "atsamdx1.h"
+#include "atsamdx1_getkey_usb.inc"
+#include "cut.inc"              // string cutter utility, for long USB printf's
 
-/*
-extern char ch[];
-*/
-extern void queryKey(void);
-extern int read_ln;
-extern unsigned int getKey(void); // hardware-independent wrapper
+extern unsigned int getKey(void);       // hardware-independent wrapper
 
 /*
 #include <stdint.h>
@@ -67,106 +63,26 @@ extern unsigned int getKey(void); // hardware-independent wrapper
  * Terminal I/O functions
  */
 
-int length_print_string = 0; // would like to shed this global
-
-#include "cut.inc" // string cutter utility, for long USB printf's:
-
-
-
-
 /* USB based */
 #define printf(format,integer) \
-    length_print_string = 0; \
     print_string[0] = (uint32_t) "\0"; \
     sprintf(print_string, format, integer); \
-    length_print_string = strlen(print_string); \
         chopped_acm_write(print_string)
 
-//  io_write(io, (uint8_t *)print_string, length_print_string)
-
-
-
-
-#ifdef OBSOLETE_AINSU
-/* USB based */
-#define printf(format,integer) \
-    length_print_string = 0; \
-    print_string[0] = (uint32_t) "\0"; \
-    sprintf(print_string, format, integer); \
-    length_print_string = strlen(print_string); \
-    if (length_print_string > CHOP_LN) { \
-        chopped_acm_write(print_string); \
-    } else { \
-        cdcdf_acm_write((uint8_t *)print_string, strlen(print_string)); \
-    }
-
-//  io_write(io, (uint8_t *)print_string, length_print_string)
-#endif // #ifdef OBSOLETE_AINSU
-
-
-
-
-/* USART based
-#define printf(format,integer) \
-    length_print_string = 0; \
-    print_string[0] = (uint32_t) "\0"; \
-    sprintf(print_string, format, integer); \
-    length_print_string = strlen(print_string); \
-    io_write(io, (uint8_t *)print_string, length_print_string)
-*/
-
-void fake_aa(char * s, int l) {
-}
-
-// #define printf UARTprintf
-// #define print_this(s,l) io_write(io, (uint8_t *)s, l);
-#define print_this(s,l) fake_aa(s, l);
-
-// #define getch UARTgetc
 #define getch getKey
-
-
-/*
-void putch(char c) {
-    char *p;
-    p = &c;
-    io_write(io, (uint8_t *) p, 1);
-}
-*/
-
 
 void putch(char c) {
     char *p;
     p = &c;
     c = *p + 0;
-    // io_write(io, (uint8_t *) p, 1);
+    print_string[0] = c;
+    print_string[1] = '\0';
+    chopped_acm_write(print_string);
 }
-
-
-/*
-int getquery(void) {
-    // return(UARTCharsAvail(UART0_BASE) != 0);
-    int l_read_ln = 0;
-    int not_found = 1;
-    while(not_found) {
-        queryKey(); // sets read_ln;
-        if (read_ln > 0) not_found = 0; // escape loop
-    }
-    // return(UARTCharsAvail(UART0_BASE) != 0);
-    io_write(io, (uint8_t *)" !chars! ", 9);
-    l_read_ln = read_ln;
-    read_ln = 0;
-    return l_read_ln; // can be more than 1
-}
-
-*/
 
 int getquery(void) {
-    return -1;
+    return -1;                  /* TODO wa1tnr */
 }
-
-
-
 
 /****f* main/main
  * NAME
@@ -178,48 +94,70 @@ int getquery(void) {
  ******
  */
 
+void ESC_lb(void) {
+    char ch[0];
+    ch[0]='\033'; // ESCape
+    putch(ch[0]);
+    ch[0]='\133'; // [
+    putch(ch[0]);
+}
+
+void bg_blue(void) {
+    ESC_lb();
+    strcpy(print_string, "44m");
+    chopped_acm_write(print_string);
+}
+
+void fg_yellow(void) {
+    ESC_lb();
+    strcpy(print_string, "0;1;33m");
+    chopped_acm_write(print_string);
+}
+
+void color_reset(void) {
+    ESC_lb();
+    strcpy(print_string, "0m");
+    chopped_acm_write(print_string);
+}
+
+void pad_one_space(void) {
+    putch('\040');
+}
+
 void interpreter(void);         /* forward reference */
 
 void camelforth(void) {
-
-    // for (volatile int i=8001002; i>0; i--) {
-
-    for (volatile int i=3030303; i>0; i--) {
-        // empty loop to delay
+    for (volatile int i = 7080706; i > 0; i--) {
     }
 
-    strcpy(tib_buffer, "\n\ncamel");
-    for (volatile int i=2048; i>0; i--) { }
-    cdcdf_acm_write((uint8_t *)tib_buffer, strlen(tib_buffer));
+    strcpy(print_string, "\n\n");
+    chopped_acm_write(print_string);
 
-    for (volatile int i=2048; i>0; i--) { }
+    fg_yellow();
+    bg_blue();
 
-    strcpy(tib_buffer, "forth");
-    for (volatile int i=2048; i>0; i--) { }
-    cdcdf_acm_write((uint8_t *)tib_buffer, strlen(tib_buffer));
+    pad_one_space();
 
-    for (volatile int i=2048; i>0; i--) { }
+/*
+    strcpy(print_string, "On branch master");
+    strcpy(print_string, "On branch ainsu-CamelForth-d51-usb");
+*/
+    strcpy(print_string, "On branch master");
+    chopped_acm_write(print_string);
 
-    strcpy(tib_buffer, "()\n\n"); // length: 15
-    for (volatile int i=2048; i>0; i--) { }
-    cdcdf_acm_write((uint8_t *)tib_buffer, strlen(tib_buffer));
+    pad_one_space();
 
-    for (volatile int i=2048; i>0; i--) { }
+    color_reset();
 
-    // above line modded for newline output 14 SEP 02:00 UTC.
-    // cdcdf_acm_write((uint8_t *)tib_buffer, strlen(tib_buffer));
+    strcpy(print_string, "\n\nSun Sep 23 00:06:51 UTC 2018");
+    chopped_acm_write(print_string);
 
-    while (1) {     /* loop in case interpreter() ever terminates */
+    strcpy(print_string, "\n\ncamelforth()\n\n");
+    chopped_acm_write(print_string);
 
+    fg_yellow();
+
+    while (1) {                 /* loop in case interpreter() ever terminates */
         interpreter();
-        strcpy(tib_buffer, " ~NOterpr ~");
-        cdcdf_acm_write((uint8_t *)tib_buffer, strlen(tib_buffer));
-        for (volatile int i=2048; i>0; i--) { }
-        // 14 SEP 02:00 appears that interpreter() is called and
-        // perhaps calls 'emit()' at least once.  ISRT that the
-        // signon message has lots of emit()s that should be seen,
-        // once live code is running.
-        // right now it's boilerplate (should repeat though, perhaps?)
-        // that is, emit() should still be called more than one time.
     }
 }
