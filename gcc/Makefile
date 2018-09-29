@@ -62,7 +62,7 @@ hpl/core/hpl_init.o \
 hal/utils/src/utils_list.o \
 hpl/core/hpl_core_m0plus_base.o \
 hal/utils/src/utils_assert.o \
-usb_start.o \
+usb_support.o \
 hpl/dmac/hpl_dmac.o \
 hpl/sysctrl/hpl_sysctrl.o \
 hpl/gclk/hpl_gclk.o \
@@ -83,6 +83,7 @@ hal/src/hal_atomic.o \
 src/cf/forth.o \
 main.o
 
+# usb_start.o \
 # src/cf/atsamdx1/usb_gateway.o \
 
 OBJS_AS_ARGS +=  \
@@ -99,7 +100,7 @@ OBJS_AS_ARGS +=  \
 "hal/utils/src/utils_list.o" \
 "hpl/core/hpl_core_m0plus_base.o" \
 "hal/utils/src/utils_assert.o" \
-"usb_start.o" \
+"usb_support.o" \
 "hpl/dmac/hpl_dmac.o" \
 "hpl/sysctrl/hpl_sysctrl.o" \
 "hpl/gclk/hpl_gclk.o" \
@@ -120,6 +121,7 @@ OBJS_AS_ARGS +=  \
 "src/cf/forth.o" \
 "main.o"
 
+# "usb_start.o" \
 # "src/cf/atsamdx1/usb_gateway.o" \
 
 # List the dependency files
@@ -139,7 +141,7 @@ DEPS_AS_ARGS +=  \
 "hal/utils/src/utils_list.d" \
 "hpl/core/hpl_core_m0plus_base.d" \
 "hal/utils/src/utils_assert.d" \
-"usb_start.d" \
+"usb_support.d" \
 "hpl/dmac/hpl_dmac.d" \
 "hpl/sysctrl/hpl_sysctrl.d" \
 "hpl/gclk/hpl_gclk.d" \
@@ -160,6 +162,7 @@ DEPS_AS_ARGS +=  \
 "src/cf/forth.d" \
 "main.d"
 
+# "usb_start.d" \
 # "src/cf/atsamdx1/usb_gateway.d" \
 
 OUTPUT_FILE_NAME :=AtmelStart
