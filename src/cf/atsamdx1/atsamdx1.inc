@@ -1,3 +1,5 @@
+#define TEST_BLOCK_ADDR_B 11
+// address of 0 does do the MSDOS5.0 thing
 /****h* camelforth/atsamdx1/atsamdx1.inc
  *
  * from:
@@ -49,6 +51,11 @@
 #include "atsamdx1.h"
 #include "atsamdx1_getkey_usb.inc"
 #include "cut.inc"              // string cutter utility, for long USB printf's
+
+#include "at25df081a.h"
+static uint8_t read_buff_b[64];
+
+// char readstring[64];
 
 extern unsigned int getKey(void);       // hardware-independent wrapper
 
@@ -160,6 +167,42 @@ void camelforth(void) {
     chopped_acm_write(print_string);
 
     fg_yellow();
+
+    /* populate the read buffer from SPI flashROM */
+    at25dfx_read(read_buff_b, 64, TEST_BLOCK_ADDR_B);
+
+    strcpy(print_string, "\n\ntest buffer:\n\n");
+    chopped_acm_write(print_string);
+
+    strcpy(print_string, (char *) read_buff_b);
+    // strcpy(readstring, (char *) read_buff_b);
+    print_string[63] = '\0';
+    chopped_acm_write(print_string);
+
+    for (int j = 20000; j>0; j--) {
+        strcpy(print_string, (char *) read_buff_b);
+        print_string[63] = '\0';
+        for (volatile int i = 3000; i>0; i--) { }
+        chopped_acm_write(print_string);
+    }
+
+    strcpy(print_string, "\n\n");
+    chopped_acm_write(print_string);
+
+/* main.c 
+
+213     // Read back this sector and compare them with the expected values //
+214     at25dfx_read(read_buff, AT25DFX_TEST_DATA_SIZE, AT25DFX_TEST_BLOCK_ADDR);
+215 
+216     // strcpy(print_string, read_buff);
+217     // print_string[1] = '\0';
+218     // print_string[63] = '\0';
+219     // chopped_acm_write(print_string);
+*/
+
+
+
+
 
     while (1) {                 /* loop in case interpreter() ever terminates */
         interpreter();
