@@ -168,10 +168,20 @@ void camelforth(void) {
 
     fg_yellow();
 
-    /* populate the read buffer from SPI flashROM */
-    at25dfx_read(read_buff_b, 64, TEST_BLOCK_ADDR_B);
-
     strcpy(print_string, "\n\ntest buffer:\n\n");
+    chopped_acm_write(print_string);
+
+    /* populate the read buffer from SPI flashROM */
+    for (int k = 3; k < 32768; (k = k + 64)) {
+        // at25dfx_read(read_buff_b, 64, TEST_BLOCK_ADDR_B);
+        at25dfx_read(read_buff_b, 64, k);
+        strcpy(print_string, (char *) read_buff_b);
+        print_string[63] = '\0';
+        chopped_acm_write(print_string);
+        for (volatile int i = 4800; i>0; i--) { }
+    }
+
+    strcpy(print_string, "\n\nalamaraine\n\n");
     chopped_acm_write(print_string);
 
     strcpy(print_string, (char *) read_buff_b);
