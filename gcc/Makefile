@@ -255,6 +255,9 @@ install:
 	@sleep 1
 	@./scripts/_bossac_local.sh ./AtmelStart.bin
 
+cleanup:
+	@./scripts/cleanup.sh
+
 clean:
 	rm -f $(OBJS_AS_ARGS)
 	rm -f $(OUTPUT_FILE_PATH)
