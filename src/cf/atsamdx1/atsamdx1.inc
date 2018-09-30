@@ -133,6 +133,22 @@ void pad_one_space(void) {
 
 void interpreter(void);         /* forward reference */
 
+void printSPIflashROMdemo(void) {
+    strcpy(print_string, "\n\ntest buffer:\n\n");
+    chopped_acm_write(print_string);
+
+    int offset = ((( 4096 * 4) -31) + (256 * 22) );
+    int bignumber = offset + (1024 * 4);
+    for (int k = offset; k < bignumber; (k = k + 8)) {
+        // at25dfx_read(read_buff_b, 64, TEST_BLOCK_ADDR_B);
+        at25dfx_read(read_buff_b, 8, k);
+        strcpy(print_string, (char *) read_buff_b);
+        print_string[8] = '\0';
+        chopped_acm_write(print_string);
+        for (volatile int i =  9600; i>0; i--) { }
+    }
+}
+
 void camelforth(void) {
     // for (volatile int i = 7080706; i > 0; i--) {
     for (volatile int i = 1080706; i > 0; i--) {
@@ -147,7 +163,7 @@ void camelforth(void) {
     pad_one_space();
 
 /*
-    strcpy(print_string, "On branch lark-ad-cont-");
+    strcpy(print_string, "On branch lark-af-cont-");
 
     repository:
     ainsu-Camel-d21-usb-flashROM-a
@@ -160,59 +176,17 @@ void camelforth(void) {
 
     color_reset();
 
-    strcpy(print_string, "\n\nSat Sep 29 19:55:01 UTC 2018");
+    strcpy(print_string, "\n\nSat Sep 29 23:11:43 UTC 2018");
     chopped_acm_write(print_string);
 
     strcpy(print_string, "\n\ncamelforth()\n\n");
     chopped_acm_write(print_string);
 
     fg_yellow();
-
-    strcpy(print_string, "\n\ntest buffer:\n\n");
-    chopped_acm_write(print_string);
-
-    int offset = ((32768 * 8) -31);
-    int bignumber = 1234123123;
-    for (int k = offset; k < bignumber; (k = k + 8)) {
-        // at25dfx_read(read_buff_b, 64, TEST_BLOCK_ADDR_B);
-        at25dfx_read(read_buff_b, 8, k);
-        strcpy(print_string, (char *) read_buff_b);
-        print_string[8] = '\0';
-        chopped_acm_write(print_string);
-        for (volatile int i =  9600; i>0; i--) { }
-    }
-
-    strcpy(print_string, "\n\nalamaraine\n\n");
-    chopped_acm_write(print_string);
-
-    strcpy(print_string, (char *) read_buff_b);
-    // strcpy(readstring, (char *) read_buff_b);
-    print_string[63] = '\0';
-    chopped_acm_write(print_string);
-
-    for (int j = 20000; j>0; j--) {
-        strcpy(print_string, (char *) read_buff_b);
-        print_string[63] = '\0';
-        for (volatile int i = 3000; i>0; i--) { }
-        chopped_acm_write(print_string);
-    }
+    printSPIflashROMdemo();
 
     strcpy(print_string, "\n\n");
     chopped_acm_write(print_string);
-
-/* main.c 
-
-213     // Read back this sector and compare them with the expected values //
-214     at25dfx_read(read_buff, AT25DFX_TEST_DATA_SIZE, AT25DFX_TEST_BLOCK_ADDR);
-215 
-216     // strcpy(print_string, read_buff);
-217     // print_string[1] = '\0';
-218     // print_string[63] = '\0';
-219     // chopped_acm_write(print_string);
-*/
-
-
-
 
 
     while (1) {                 /* loop in case interpreter() ever terminates */
