@@ -137,8 +137,12 @@ void printSPIflashROMdemo(void) {
     strcpy(print_string, "\n\ntest buffer:\n\n");
     chopped_acm_write(print_string);
 
-    int offset = ((( 4096 * 4) -31) + (256 * 22) );
-    int bignumber = offset + (1024 * 4);
+    // int offset_b = ( ( ( 4096 * 4) -31) + (256 * 22) - 24 + 96  + 64 + 16 );
+
+    int offset   = ( 16384 - 3 + 4096 + 1024 + 512 + 124 + 1 );
+
+    int bignumber = offset + (128 * 8);
+
     for (int k = offset; k < bignumber; (k = k + 8)) {
         // at25dfx_read(read_buff_b, 64, TEST_BLOCK_ADDR_B);
         at25dfx_read(read_buff_b, 8, k);
