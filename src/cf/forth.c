@@ -630,6 +630,7 @@ CODE(_dots) {    /* print stack, for testing */
 
 #undef AINSU_DUMP_EXTERN
 #include "dump.inc"
+#include "dump_fl.inc"
 #ifndef AINSU_DUMP_EXTERN
 
 CODE(dump) {   /* adr n -- */
