@@ -17,7 +17,6 @@ static uint8_t read_buff_d[1];
 void dumpflROM() {
     int p = psp[0]; psp++;
     printf("\n%4X: ", p);
-
     int count = -1;
     for (int i = 0; i < 16; i++) {
         count++;
@@ -29,20 +28,10 @@ void dumpflROM() {
         }
         at25dfx_read(read_buff_d, 1, p++);
         char c = (uint32_t) read_buff_d[0];
-        // print_string[0] = c;
         printf(" %02X", (c & 0xff));
-        // putch(c);
     }
-        
-        // for (; c >0 ; c--) { }
-/*
-        at25dfx_read(read_buff_d, 1, p++);
-        char c = (uint32_t) read_buff_d;
-        printf(" %02X", (c & 0xff));
-*/
-    p = p - 32;
+    p = p - 16;
     d_three_sp();
-
     for (int i = 0; i < 16; i++) {
         at25dfx_read(read_buff_d, 1, p++); 
         print_string[0] = (uint32_t) * read_buff_d;
@@ -53,7 +42,6 @@ void dumpflROM() {
     }
     psp--;
     psp[0] = p + 16;
-
 }
 
 /* dump 256 bytes of RAM */
