@@ -10,7 +10,12 @@ Considered to be part of the effort to create
     
 # NEWS
 
-CamelForth
+01 October 2018: primitive flash dump word now available on
+one developmental branch (soon to be in master, most likely).
+
+    See branch lark-ag-fork-FLASHDUMP-a-
+
+# CamelForth
 
   Please use ALL CAPS when addressing CamelForth.
 
@@ -191,10 +196,10 @@ over the bootloader).
 Bossac may be in more than one version in the Arduino IDE
 sub-tree; 1.8.0-48 was present and was used, here.
 
-Fri Sep 28 18:21:36 UTC 2018
+Mon Oct  1 19:13:21 UTC 2018
 
-On branch publish-aa-
+On branch lark-ag-fork-FLASHDUMP-a-
 
- $ cat ./README.md | sed 194q | md5sum
+ $ cat ./README.md | sed 203q | md5sum
 
-2a0f84d8edc98bac4e57633e28068023
+115780ffba8f7c8e5e50c055281961d3
