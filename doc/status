@@ -1,3 +1,21 @@
+Mon Oct  1 04:08:27 UTC 2018
+
+  ainsu-Camel-d21-usb-flashROM-a
+
+  On branch lark-ag-fork-FLASHDUMP-a-
+
+  Working SPI flashROM dump word.  Works just the
+  same as the regular dump word (which at the moment
+  is disabled; need to reinstate).
+
+  This is a very nice thing to have available. ;)
+
+  Just populate the SPI flashROM with ascii text
+  files(s) (source code or any other plaintext
+  document).  Or even binaries.
+
+  The dump word will handle it. ;)
+
 Sat Sep 29 22:58:13 UTC 2018
 
   ainsu-Camel-d21-usb-flashROM-a
