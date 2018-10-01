@@ -40,6 +40,7 @@ void dumpflROM() {
         print_string[1] = '\0';
         chopped_acm_write(print_string);
     }
+    p = p - 16; // alter the value to be pushed onto the stack
     psp--;
     psp[0] = p + 16;
 }
