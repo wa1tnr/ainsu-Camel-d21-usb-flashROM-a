@@ -1,4 +1,4 @@
-#define TEST_BLOCK_ADDR_B 11
+// #define TEST_BLOCK_ADDR_B 11
 // address of 0 does do the MSDOS5.0 thing
 /****h* camelforth/atsamdx1/atsamdx1.inc
  *
@@ -141,7 +141,7 @@ void printSPIflashROMdemo(void) {
 
     int offset   = ( 16384 - 3 + 4096 + 1024 + 512 + 124 + 1 );
 
-    int bignumber = offset + (128 * 8);
+    int bignumber = offset + (128 * 2);
 
     for (int k = offset; k < bignumber; (k = k + 8)) {
         // at25dfx_read(read_buff_b, 64, TEST_BLOCK_ADDR_B);
@@ -180,7 +180,7 @@ void camelforth(void) {
 
     color_reset();
 
-    strcpy(print_string, "\n\nSat Sep 29 23:11:43 UTC 2018");
+    strcpy(print_string, "\n\nTue Oct  2 03:22:40 UTC 2018");
     chopped_acm_write(print_string);
 
     strcpy(print_string, "\n\ncamelforth()\n\n");
