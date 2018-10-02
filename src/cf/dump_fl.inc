@@ -46,7 +46,7 @@ void dumpflROM() {
 }
 
 /* dump 256 bytes of RAM */
-CODE(dump) {                    /* adr n -- */
+CODE(dumpfl) {                    /* adr n -- */
     int j = psp[0];
     psp++;
     for (int i = 0; i < j; i++) {
