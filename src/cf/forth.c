@@ -744,6 +744,7 @@ PRIMITIVE(dothhhh);
 PRIMITIVE(_dotsf);
 PRIMITIVE(_dots);
 PRIMITIVE(dump);
+PRIMITIVE(dumpfl);
 PRIMITIVE(bye);
 
 /* USER VARIABLES */
@@ -1532,5 +1533,6 @@ HEADER(dothh, marker, 0, "\003.HH");
 HEADER(dothhhh, dothh, 0, "\005.HHHH");
 HEADER(dots, dothhhh, 0, "\002.S");
 HEADER(dump, dots, 0, "\004DUMP");
-HEADER(words, dump, 0, "\005WORDS");
+HEADER(dumpfl, dump, 0, "\006DUMPFL");
+HEADER(words, dumpfl, 0, "\005WORDS");
 HEADER(cold, words, 0, "\004COLD");
