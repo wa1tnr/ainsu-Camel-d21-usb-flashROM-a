@@ -57,7 +57,7 @@ void dumpRAM() {
 }
 
 /* dump 256 bytes of RAM */
-CODE(bbdump) {                    /* adr n -- */
+CODE(dump) {                    /* adr n -- */
     int j = psp[0];
     psp++;
     for (int i = 0; i < j; i++) {
