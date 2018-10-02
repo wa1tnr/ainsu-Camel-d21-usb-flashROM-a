@@ -1,3 +1,25 @@
+Tue Oct  2 03:34:38 UTC 2018
+
+  On branch lark-aj-flashROM-a-
+  ainsu-Camel-d21-usb-flashROM-a
+
+  See previous notes (just below).
+
+
+Tue Oct  2 03:31:13 UTC 2018
+
+  ainsu-Camel-d21-usb-flashROM-a
+
+  On branch lark-ag-fork-FLASHDUMP-a- (never commited this message)
+
+  Other than code-cleanup chores, does not look like
+  many changes are required from here, forward - the
+  DUMPFL word is pretty much the DUMP word, but
+  applied to a different 'memory space' (external
+  SPI flashROM, in this instance).
+
+  Good outcome.  Useful tool.
+
 Mon Oct  1 04:08:27 UTC 2018
 
   ainsu-Camel-d21-usb-flashROM-a
